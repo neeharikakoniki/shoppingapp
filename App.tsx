@@ -1,15 +1,20 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { ProductProvider } from './context/ProductContext';
-import AppNavigator from './navigation/AppNavigator';
+// import { ProductProvider } from './src/context/ProductContext'; 
+import AppNavigator from './src/navigation/AppNavigator';
+
+import { Provider } from 'react-redux';
+import { store } from './src/app/store';
 
 const App = () => {
   return (
-    <ProductProvider> {}
+    // <ProductProvider> 
+    <Provider store={store}> 
       <NavigationContainer>
-        <AppNavigator /> {}
+        <AppNavigator />
       </NavigationContainer>
-    </ProductProvider>
+    </Provider>
+    // </ProductProvider> 
   );
 };
 

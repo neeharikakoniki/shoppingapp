@@ -7,14 +7,15 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
-import { useProductContext } from '../context/ProductContext';
+// import { useProductContext } from '../context/ProductContext'; // ❌
+import { useAppSelector, useAppDispatch } from '../hooks/reduxHooks';
+import { removeFromCart } from '../slices/productSlice';
 
 export default function CartScreen() {
-  const { state, removeFromCart } = useProductContext();
-  const cartItems = state.cart;
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector((state) => state.product.cart);
 
-  const total = cartItems.reduce((sum: number, item: { price: number; }) => sum + item.price, 0);
-
+  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
 
   const handleRemove = (id: number) => {
     Alert.alert(
@@ -25,7 +26,7 @@ export default function CartScreen() {
         {
           text: 'Remove',
           style: 'destructive',
-          onPress: () => removeFromCart(id),
+          onPress: () => dispatch(removeFromCart(id)),
         },
       ]
     );
@@ -62,6 +63,7 @@ export default function CartScreen() {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

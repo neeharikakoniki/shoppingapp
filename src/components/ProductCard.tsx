@@ -1,21 +1,22 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useProductContext } from '../context/ProductContext';
 import { Product } from '../types/types';
+// import { useProductContext } from '../context/ProductContext';
+import { useAppDispatch } from '../hooks/reduxHooks';
+import { addToCart } from '../slices/productSlice';
 
 type Props = {
   product: Product;
 };
 
-const ProductCard = forwardRef(({ product }: Props, ref) => {
+export default function ProductCard({ product }: Props) {
   const navigation = useNavigation<any>();
-  const { addToCart } = useProductContext();
-  const localRef = useRef(null);
+  const dispatch = useAppDispatch();
 
-  useImperativeHandle(ref, () => ({
-    logProductId: () => console.log(`Product ID: ${product.id}`),
-  }));
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
 
   return (
     <View style={styles.card}>
@@ -27,13 +28,12 @@ const ProductCard = forwardRef(({ product }: Props, ref) => {
           title="View"
           onPress={() => navigation.navigate('ProductDetails', { id: product.id })}
         />
-        <Button title="Add to Cart" color="green" onPress={() => addToCart(product)} />
+        <Button title="Add to Cart" color="green" onPress={handleAddToCart} />
       </View>
     </View>
   );
-});
+}
 
-export default ProductCard;
 
 const styles = StyleSheet.create({
   card: {
