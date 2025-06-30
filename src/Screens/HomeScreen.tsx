@@ -1,21 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../app/store';
 import ProductCard from '../components/ProductCard';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import axios from 'axios';
-import { setProducts } from '../slices/productSlice';
+import useFetchProducts from '../hooks/customhooks/useFetchProducts';
 
 export default function HomeScreen() {
-  const dispatch = useAppDispatch();
-  const products = useAppSelector((state) => state.product.products);
+  useFetchProducts(); 
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await axios.get('https://dummyjson.com/products');
-      dispatch(setProducts(res.data.products));
-    };
-    fetchProducts();
-  },);
+  const products = useSelector((state: RootState) => state.product.products);
 
   return (
     <View style={{ flex: 1, padding: 10 }}>
