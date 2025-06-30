@@ -15,7 +15,7 @@ export default function HomeScreen() {
       dispatch(setProducts(res.data.products));
     };
     fetchProducts();
-  }, [dispatch]);
+  },);
 
   return (
     <View style={{ flex: 1, padding: 10 }}>

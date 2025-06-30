@@ -5,9 +5,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from '../Screens/HomeScreen';
 import ProductDetails from '../Screens/ProductDetails';
-import CartScreen from '../Screens/CartScreen';
 import AddProductScreen from '../Screens/AddProductScreen';
 import EditProductScreen from '../Screens/EditProductScreen';
+import CartClassComponent from '../components/CartClassComponent';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -23,7 +23,7 @@ const HomeStack = () => (
 const TabNavigator = () => (
   <Tab.Navigator>
     <Tab.Screen name="Products" component={HomeStack} />
-    <Tab.Screen name="Cart" component={CartScreen} />
+    <Tab.Screen name="Cart" component={CartClassComponent} />
   </Tab.Navigator>
 );
 

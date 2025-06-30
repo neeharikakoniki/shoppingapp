@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
-// import { useProductContext } from '../context/ProductContext'; // ❌
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHooks';
 import { removeFromCart } from '../slices/productSlice';
 

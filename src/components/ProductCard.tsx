@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Product } from '../types/types';
-// import { useProductContext } from '../context/ProductContext';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { addToCart } from '../slices/productSlice';
 
